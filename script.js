@@ -7,7 +7,7 @@ generateBtn.addEventListener("click", writePassword);
 // Create function to prompt the password with the required criteria
 function writePassword() {
   var passwordLength = parseInt(
-    prompt("Enter the length of the password, between 8 and 128 characters")
+    prompt("Enter the length of the password, between 8 and 128 characters.")
   );
 
   // Validate password length
@@ -21,7 +21,7 @@ function writePassword() {
     "Do you want to include lowercase characters?"
   );
   var includeUppercase = confirm(
-    "Do you want to inlcude uppercase characters?"
+    "Do you want to include uppercase characters?"
   );
   var includeNumeric = confirm("Do you want to include numbers?");
   var includeSpecial = confirm("Do you want to include special characters?");
@@ -31,7 +31,7 @@ function writePassword() {
     !includeLowercase &&
     !includeUppercase &&
     !includeNumeric &&
-    includeSpecial
+    !includeSpecial
   ) {
     alert("You must select at least one character type");
     return;
@@ -48,4 +48,28 @@ function writePassword() {
 
   // alert for generated password
   alert("Your generated password is: " + password);
+}
+
+function generatePassword(length, lowercase, uppercase, numeric, special) {
+  var characterSet = "";
+  var password = "";
+
+  if (lowercase) {
+    characterSet += "abcdefghijklmnopqrstuvwxyz";
+  }
+  if (uppercase) {
+    characterSet += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  }
+  if (numeric) {
+    characterSet += "0123456789";
+  }
+  if (special) {
+    characterSet += '!"#$%&()*+,-./:;<=>?@[]^_`{|}~';
+  }
+
+  for (var i = 0; i < length; i++) {
+    var randomIndex = Math.floor(Math.random() * characterSet.length);
+    password += characterSet[randomIndex];
+  }
+  return password;
 }
